@@ -1,32 +1,36 @@
-﻿using System;
+using System;
 
-class BagelCostApp
+class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        Console.Write("Enter the number of bagels ordered: ");
+        // Step 1: Ask the user
+        Console.WriteLine("How many bagels would you like to order?");
 
-        int numBagels;
-        while (!int.TryParse(Console.ReadLine(), out numBagels) || numBagels < 0)
+        // Step 2: Get, handle null, and convert input
+        int bagels = int.Parse(Console.ReadLine() ?? "0");
+
+        // Step 3: Check for invalid input
+        if (bagels <= 0)
         {
-            Console.Write("Invalid input. Please enter a valid whole number of bagels: ");
+            Console.WriteLine("Invalid input. Please enter a valid whole number of bagels.");
+            return;
         }
 
-        int pricePerBagel;
+        // Step 4: Calculate the cost
+        double totalCost;
 
-        if (numBagels < 6)
+        if (bagels >= 6)
         {
-            pricePerBagel = 75;
+            totalCost = bagels * 0.60; // 60c each for half dozen or more
         }
         else
         {
-            pricePerBagel = 60;
+            totalCost = bagels * 0.75; // 75c each for less than half dozen
         }
 
-        int totalCost = numBagels * pricePerBagel;
-
-        Console.WriteLine($"Number of bagels: {numBagels}");
-        Console.WriteLine($"Price per bagel: {pricePerBagel} cents");
-        Console.WriteLine($"Total cost: {totalCost} cents (${totalCost / 100.0:F2})");
+        // Step 5: Display the result
+        Console.WriteLine("You ordered " + bagels + " bagels.");
+        Console.WriteLine("Total cost: R" + totalCost);
     }
 }
